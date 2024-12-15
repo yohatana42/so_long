@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/11 20:58:08 by yohatana         ###   ########.fr        #
+#    Updated: 2024/12/15 18:53:11 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRCS		=\
 				get_next_line/get_next_line.c\
 				get_next_line/get_next_line_utils.c\
 				main.c\
-				map_check.c
+				map_check.c\
+				map_check_helper.c\
+				all_free.c
 
 
 # object file name

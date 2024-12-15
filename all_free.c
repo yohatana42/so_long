@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   all_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/15 19:20:11 by yohatana         ###   ########.fr       */
+/*   Created: 2024/12/15 18:52:34 by yohatana          #+#    #+#             */
+/*   Updated: 2024/12/15 19:05:31 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
-int	main(int argc, char **argv)
+void	all_free(t_map *map)
 {
-	t_map	*map;
-
-	map = (t_map *)malloc(sizeof(t_map) * 1);
-	if (!map)
-		perror("malloc failed\n");
-	if (argc == 2)
+	if (map)
 	{
-		printf("argc = 2\n");
-		map = map_check(argv[1], map);
-		// map check
-		// mlx hook
-		// print
-
+		if (map->map_str)
+			free(map->map_str);
+		free(map);
 	}
-	else
-	{
-		perror("argument is only 1");
-	}
-	return (SUCCESS);
 }

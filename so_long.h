@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/14 21:30:55 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:22:13 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,13 @@
 # include <unistd.h>
 
 # define SUCCESS 0
-# define ERROR -1
+# define ERROR 1
 # define MAP_PATH "maps/\0"
 # define BER_EXTE ".ber\0"
-# define MAP_MAX 5000
+# define MAP_MAX_LIMIT 5000
+# define WALL '1'
+# define SPACE '0'
+
 
 typedef struct s_map
 {
@@ -50,5 +53,12 @@ t_map	*map_check(char *map_name, t_map *map);
 // char	**map_read(int fd);
 // int	map_name_check(char *map_name);
 // int	map_charactaer_check(t_map *map);
+
+// map_check_helper
+int	map_charactaer_check(t_map *map);
+int	get_map_hight(t_map *map);
+
+// aal_free
+void	all_free(t_map *map);
 
 #endif
