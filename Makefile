@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/15 18:53:11 by yohatana         ###   ########.fr        #
+#    Updated: 2024/12/17 21:13:39 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,6 @@ SRCS		=\
 
 # object file name
 OBJS		= $(SRCS:.c=.o)
-%o: %c
-		$(CC) $(CCFLAGS) -I$(LIBFT) -I$(PRINTF) -I$(MLX) -c $< -o $@
 
 # compile flag
 CC			= cc
@@ -35,6 +33,8 @@ CCFLAGS		= -Wall -Wextra -Werror
 # Archive and remove command
 AR			= ar rcs
 RM			= rm -f
+
+.DEFAULT:	all
 
 all:		$(NAME)
 
@@ -53,9 +53,11 @@ MLX = minilibx-linux
 $(MLX)/libmlx_Linux.a:
 		make -C $(MLX)
 
+%.o: %.c
+		$(CC) $(CCFLAGS) -I$(LIBFT) -I$(PRINTF) -I$(MLX) -c $< -o $@
 
 ${NAME}:	${OBJS} $(MLX)/libmlx_Linux.a $(PRINTF)/libftprintf.a $(LIBFT)/libft.a
-			$(CC) ${OBJS} -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(MLX) -lmlx -lm -lXext -lX11 -o $(NAME)
+			$(CC) $(CCFLAGS) ${OBJS} -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(MLX) -lmlx -lm -lXext -lX11 -o $(NAME)
 
 clean:
 			make -C $(PRINTF) clean
