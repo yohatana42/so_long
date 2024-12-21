@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/17 21:13:39 by yohatana         ###   ########.fr        #
+#    Updated: 2024/12/21 16:20:51 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS		=\
 				main.c\
 				map_check.c\
 				map_check_helper.c\
-				all_free.c
+				collect_list.c\
+				create_struct.c
 
 
 # object file name
@@ -57,7 +58,7 @@ $(MLX)/libmlx_Linux.a:
 		$(CC) $(CCFLAGS) -I$(LIBFT) -I$(PRINTF) -I$(MLX) -c $< -o $@
 
 ${NAME}:	${OBJS} $(MLX)/libmlx_Linux.a $(PRINTF)/libftprintf.a $(LIBFT)/libft.a
-			$(CC) $(CCFLAGS) ${OBJS} -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(MLX) -lmlx -lm -lXext -lX11 -o $(NAME)
+			$(CC) ${OBJS} -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(MLX) -lmlx -lm -lXext -lX11 -o $(NAME)
 
 clean:
 			make -C $(PRINTF) clean

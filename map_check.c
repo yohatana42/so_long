@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/15 19:25:19 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:10:50 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_map	*map_check(char *map_name, t_map *map)
 	else
 	{
 		perror("map name is not <.ber> end");
+		all_free(map);
 	}
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/17 21:10:07 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:20:42 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdlib.h>
 
-# define SUCCESS 0
-# define ERROR 1
+# define ERROR -1
 # define OFF 0
 # define ON 1
 # define MAP_PATH "maps/\0"
@@ -36,19 +36,14 @@
 # define WALL '1'
 # define SPACE '0'
 
+typedef struct s_collect	t_collect;
+
 typedef struct s_count
 {
-	int		player;
-	int		collection;
-	int		exit;
+	int		p;
+	int		c;
+	int		e;
 }		t_count;
-
-typedef struct s_collect
-{
-	int	x;
-	int	y;
-	int	get_flg;
-}		t_collect;
 
 typedef struct s_player
 {
@@ -62,33 +57,44 @@ typedef struct s_exit
 	int	y;
 }		t_exit;
 
+typedef struct s_collect
+{
+	int			x;
+	int			y;
+	int			get_flg;
+	int			check_flg;
+	t_collect	*next;
+}		t_collect;
+
 typedef struct s_map
 {
-	int		player;
-	int		collection;
-	int		exit;
-	char	**map_str;
-	int		width;
-	int		hight;
-	t_count	*count;
+	t_player	*player;
+	t_collect	**c_list;
+	t_exit		*exit;
+	char		**map_str;
+	int			width;
+	int			hight;
+	t_count		*count;
 }		t_map;
 
 // main
 
 // map_check
 t_map	*map_check(char *map_name, t_map *map);
-// char	*get_map_path(char *map_name);
-// char	**map_read(int fd);
-// int	map_name_check(char *map_name);
-// int	map_charactaer_check(t_map *map);
 
 // map_check_helper
-int	map_charactaer_check(t_map *map);
-int	get_map_hight(t_map *map);
-// int	route_search(t_map *map, char object);
-int	route_search(t_map *map, char object, int cur_x, int cur_y);
+int		map_charactaer_check(t_map *map);
+int		get_map_hight(t_map *map);
+// int	route_search(t_map *map, char object, int cur_x, int cur_y);
+// int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
 
-// aal_free
+// c_list
+t_collect	**add_node(t_collect *c, t_collect **c_list);
+t_collect	*create_new(int x, int y);
+t_collect	*get_last(t_collect **c_list);
+
+// create_sturucture
+t_map	*create_struct(t_map *map);
 void	all_free(t_map *map);
 
 #endif
