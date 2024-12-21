@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/21 16:20:42 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:46:06 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ERROR -1
 # define OFF 0
 # define ON 1
+# define NG 0
+# define OK 1
 # define MAP_PATH "maps/\0"
 # define BER_EXTE ".ber\0"
 # define MAP_MAX_LIMIT 5000
@@ -80,13 +82,13 @@ typedef struct s_map
 // main
 
 // map_check
-t_map	*map_check(char *map_name, t_map *map);
+int		map_check(char *map_name, t_map *map);
 
 // map_check_helper
 int		map_charactaer_check(t_map *map);
 int		get_map_hight(t_map *map);
 // int	route_search(t_map *map, char object, int cur_x, int cur_y);
-// int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
+int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
 
 // c_list
 t_collect	**add_node(t_collect *c, t_collect **c_list);
@@ -96,5 +98,8 @@ t_collect	*get_last(t_collect **c_list);
 // create_sturucture
 t_map	*create_struct(t_map *map);
 void	all_free(t_map *map);
+
+// error
+void	error(t_map *map, char *str);
 
 #endif

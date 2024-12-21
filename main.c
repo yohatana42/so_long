@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/21 16:19:10 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:31:17 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int argc, char **argv)
 			perror("malloc failed");
 			all_free(map);
 		}
-		map = map_check(argv[1], map);
-		if (map == NULL)
+		if (map_check(argv[1], map) == NG)
 			return (EXIT_FAILURE);
 		// mlx hook
 		// print

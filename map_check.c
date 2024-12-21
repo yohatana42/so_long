@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/18 18:10:50 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:45:25 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 static char	**map_read(int fd);
 static int	map_name_check(char *map_name);
-// static int	map_charactaer_check(t_map *map);
 
-t_map	*map_check(char *map_name, t_map *map)
+int	map_check(char *map_name, t_map *map)
 {
 	int		fd;
 	char	*path;
 
-	if (map_name_check(map_name))
+	if (map_name_check(map_name) == OK)
 	{
 		path = ft_strjoin(MAP_PATH, map_name);
 		if (!path)
-			return (NULL);
+			return (0);
 		printf("map path: %s\n", path);
 		fd = open(path, O_RDONLY);
 		printf("fd %d\n", fd);
@@ -38,7 +37,7 @@ t_map	*map_check(char *map_name, t_map *map)
 			printf("%s\n", map->map_str[i]);
 		printf("-------\n");
 
-		if (map_charactaer_check(map))
+		if (map_charactaer_check(map) == OK)
 		{
 			printf("ok\n");
 		}
@@ -53,8 +52,9 @@ t_map	*map_check(char *map_name, t_map *map)
 	{
 		perror("map name is not <.ber> end");
 		all_free(map);
+		return (0);
 	}
-	return (map);
+	return (1);
 }
 
 static char	**map_read(int fd)
