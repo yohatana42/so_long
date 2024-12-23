@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/21 16:46:06 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/23 18:41:16 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_map
 	char		**map_str;
 	int			width;
 	int			hight;
+	int			**route_map;
 	t_count		*count;
 }		t_map;
 

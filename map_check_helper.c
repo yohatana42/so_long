@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:50:38 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/21 17:05:21 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/23 22:03:39 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,24 @@ int	map_charactaer_check(t_map *map)
 	printf("P :%d C :%d E :%d\n", map->count->p, map->count->c, map->count->e);
 
 	// PからCまでのルートを探索する
-	printf("c_list: %p\n", map->c_list);
-	printf("object: %p\n", *(map->c_list));
 	object = *(map->c_list);
+
+	// printf("c_list: %p\n", map->c_list);
+	// printf("object: %p\n", object);
+	// printf("object: %p object->next : %p\n", *(map->c_list), object->next);
+
 	// ここで無限ループしてる
 	// object->nextがNULLかどうか確認するべき
+
 	while (object != NULL)
 	{
-		printf("t_collect *: %p\n", object);
+		printf("t_collect *: %p object->next : %p\n", object, object->next);
 		// result = route_search_c(map, object, map->player->x, map->player->y);
 		// if (result == 0)
 		// 	error(map, "Error\n : No route to 'C', check map");
-		// object->check_flg = ON;
+		object->check_flg = ON;
 		object = object->next;
+		printf("t_collect *: %p\n", object);
 	}
 
 	// route_search(map, 'E', 'P'の場所);
@@ -136,7 +141,7 @@ static int	count_char(t_map *map, char c, int x, int y)
 	{
 		map->count->c = map->count->c + 1;
 		map->c_list = add_node(create_new(x, y), map->c_list);
-		// printf("%p %p\n", map->c_list, *(map->c_list));
+		printf("%p %p\n", map->c_list, *(map->c_list));
 	}
 	return (1);
 }
@@ -152,21 +157,36 @@ int	get_map_hight(t_map *map)
 	return (i);
 }
 
+// 幅優先と思いきや深さ優先であった
 int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y)
 {
 	int	result1;
 	int	result2;
 	int	result3;
 	int	result4;
+	int	done_flg = 0;
+
+	int	**route_map;
+
+	route_map = (int **)malloc(sizeof(int *) * map->hight);
 
 	printf("x: %d y: %d\n", cur_x, cur_y);
 
+	// 最後のマスに来たら探索終了する
 	if (cur_x < 0 || map->width < cur_x || cur_y < 0 || map->hight < cur_y)
 		return (0);
+	if (cur_x == object->x && cur_y == object->y)
+		return (1);
+	// どんどこ一方向に進んでいく
+	// 進めなかったら別方向にいく
+
+	// 探索用のマップに結果を記入する
+	// 探索用のマップは最初、すべて-1で埋められている
+	map->route_map[cur_y][cur_x] = 0;
+
+
 	if (map->map_str[cur_x -1][cur_y] == WALL)
 		result1 = 0;
-	else if (cur_x -1 == object->x && cur_y == object->y)
-		return (1);
 	else
 		result1 = route_search_c(map, object, cur_x -1, cur_y);
 	if (map->map_str[cur_x +1][cur_y] == WALL)

@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:40:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/21 16:27:24 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:52:56 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_map	*create_struct(t_map *map)
 	t_count		*count;
 	t_player	*player;
 	t_exit		*exit;
+	t_collect	**c_list;
 
 	count = (t_count *)malloc(sizeof(t_count) * 1);
 	if (!count)
@@ -27,13 +28,16 @@ t_map	*create_struct(t_map *map)
 	player = (t_player *)malloc(sizeof(t_player) * 1);
 	if (!player)
 		return (NULL);
-	exit = (t_exit *)malloc(sizeof(exit) * 1);
+	exit = (t_exit *)malloc(sizeof(t_exit) * 1);
 	if (!exit)
+		return (NULL);
+	c_list = (t_collect **)malloc(sizeof(t_collect *) * 1);
+	if (!c_list)
 		return (NULL);
 	map->count = count;
 	map->player = player;
 	map->exit = exit;
-	map->c_list = NULL;
+	map->c_list = c_list;
 	return (map);
 }
 
