@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:29:26 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/23 17:52:28 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:54:12 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,9 @@
 
 t_collect	**add_node(t_collect *c, t_collect **c_list)
 {
-	// t_collect	*top;
 	t_collect	*last;
 
 	printf("=====add_node=====\n");
-	printf("c_list: %p\n", c_list);
-	printf("c     : %p\n", c);
-	printf("c     : %d\n", c->x);
-	printf("c     : %d\n", c->y);
-	printf("c     : %p\n", c->next);
 
 	if (c_list == NULL && c == NULL)
 		return (NULL);

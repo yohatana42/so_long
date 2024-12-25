@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/21 16:44:57 by yohatana         ###   ########.fr        #
+#    Updated: 2024/12/25 20:42:20 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS		=\
 				map_check_helper.c\
 				collect_list.c\
 				create_struct.c\
-				error.c
+				error.c\
+				map_route_search.c
 
 
 # object file name

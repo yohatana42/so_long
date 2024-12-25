@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:40:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/23 17:52:56 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:54:26 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	free_c_list(t_map *map);
 
 t_map	*create_struct(t_map *map)
 {
-	printf("create_struct\n");
 	t_count		*count;
 	t_player	*player;
 	t_exit		*exit;

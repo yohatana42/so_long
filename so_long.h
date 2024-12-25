@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/25 18:43:16 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/25 20:47:24 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ int			get_map_hight(t_map *map);
 // map_check_helper
 int			map_charactaer_check(t_map *map);
 
-// int	route_search(t_map *map, char object, int cur_x, int cur_y);
+// map_rote_search
+int			map_route_search(t_map *map);
 int			route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
+int			route_search_e(t_map *map, t_exit *object, int cur_x, int cur_y);
 
 // c_list
 t_collect	**add_node(t_collect *c, t_collect **c_list);

@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/25 18:41:19 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:56:36 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,13 @@ int	map_check(char *map_name, t_map *map)
 		if (map_charactaer_check(map) == OK)
 		{
 			printf("ok\n");
-		}
-		else
-		{
-			printf("NG\n");
+			// game start
 		}
 		close(fd);
 		free(path);
 	}
 	else
-	{
-		perror("map name is not <.ber> end");
-		all_free(map);
-		return (0);
-	}
+		error(map, "map name is not <.ber> end");
 	return (1);
 }
 
