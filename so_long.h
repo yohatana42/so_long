@@ -3,104 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: somukaid <somukaid@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/23 18:41:16 by yohatana         ###   ########.fr       */
+/*   Created: 2024/06/17 11:05:29 by somukaid          #+#    #+#             */
+/*   Updated: 2024/12/19 04:16:09 by somukaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "minilibx-linux/mlx.h"
-# include "minilibx-linux/mlx_int.h"
-# include "libft/libft.h"
-# include "printf/libftprintf.h"
-# include <math.h>
-
-# include <X11/X.h>
-# include <X11/keysym.h>
-
 # include <stdio.h>
 # include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "minilibx-linux/mlx.h"
+# include "libft/libft.h"
+# include "get_next_line.h"
 
-# define ERROR -1
-# define OFF 0
-# define ON 1
-# define NG 0
-# define OK 1
-# define MAP_PATH "maps/\0"
-# define BER_EXTE ".ber\0"
-# define MAP_MAX_LIMIT 5000
-# define WALL '1'
-# define SPACE '0'
+# define ESC_KEY 65307
+# define LEFT_KEY 65361
+# define UP_KEY 65362
+# define RIGHT_KEY 65363
+# define DOWN_KEY 65364
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
 
-typedef struct s_collect	t_collect;
-
-typedef struct s_count
+typedef struct s_data
 {
-	int		p;
-	int		c;
-	int		e;
-}		t_count;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img[5];
+	size_t	player;
+	size_t	collect;
+	size_t	end;
+	int		**map;
+	int		player_x;
+	int		player_y;
+	int		map_x;
+	int		map_y;
+	char	*player_path;
+	int		player_width;
+	int		player_height;
+	char	*wall_path;
+	int		wall_width;
+	int		wall_height;
+	char	*collect_path;
+	int		collect_width;
+	int		collect_height;
+	char	*exit_path;
+	int		exit_width;
+	int		exit_height;
+	char	*empty_path;
+	int		empty_width;
+	int		empty_height;
+	int		cross;
+}	t_data;
 
-typedef struct s_player
+typedef struct s_mapc
 {
-	int	x;
-	int	y;
-}		t_player;
+	int		fd;
+	int		count;
+	char	*line;
+	size_t	len;
+}	t_mapc;
 
-typedef struct s_exit
-{
-	int	x;
-	int	y;
-}		t_exit;
+// main.c
+int		init(int argc, char *argv[], t_data *data);
+void	in_path(t_data *data);
+void	data_image(t_data *data);
+int		press_cross(int key, t_data *data);
 
-typedef struct s_collect
-{
-	int			x;
-	int			y;
-	int			get_flg;
-	int			check_flg;
-	t_collect	*next;
-}		t_collect;
+// check1.c
+int		argv_check(int argc, char *argv[]);
 
-typedef struct s_map
-{
-	t_player	*player;
-	t_collect	**c_list;
-	t_exit		*exit;
-	char		**map_str;
-	int			width;
-	int			hight;
-	int			**route_map;
-	t_count		*count;
-}		t_map;
+// check2.c
+int		map_check(char *argv[], t_data *data);
+void	move(int x, int y, t_data *data);
+void	move_r(int x, int y, t_data *data);
+void	is_wall(t_data *data);
+void	is_3piece(t_data *data);
 
-// main
+// map_check1.c
+int		is_openmap(char *argv, t_mapc *mapc);
+int		is_mapxsize(t_data *data, t_mapc *mapc);
+int		is_squarecheck(t_mapc *mapc);
+int		is_mapysize(t_data *data, t_mapc *mapc);
+void	alpha_to_mapint(t_data *data, t_mapc *mapc, int *i, int *j);
 
-// map_check
-int		map_check(char *map_name, t_map *map);
+// map_check2.c
+int		map_alloc(t_data *data, t_mapc *mapc, int *i, char *argv);
+void	load_map(t_data *data, t_mapc *mapc, int *i, int *j);
+int		can_playing(t_data *data, int *i, int *j);
 
-// map_check_helper
-int		map_charactaer_check(t_map *map);
-int		get_map_hight(t_map *map);
-// int	route_search(t_map *map, char object, int cur_x, int cur_y);
-int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
+// game1.c
+void	make_map(t_data *data);
+int		print_stage(t_data *data);
+int		keyboad_push(int key, t_data *data);
+int		is_goal(t_data *data);
+void	frees(t_data *data);
 
-// c_list
-t_collect	**add_node(t_collect *c, t_collect **c_list);
-t_collect	*create_new(int x, int y);
-t_collect	*get_last(t_collect **c_list);
-
-// create_sturucture
-t_map	*create_struct(t_map *map);
-void	all_free(t_map *map);
-
-// error
-void	error(t_map *map, char *str);
+// game2.c
+void	esckey_push(t_data *data);
+void	leftkey_push(t_data *data, size_t *move);
+void	rightkey_push(t_data *data, size_t *move);
+void	upkey_push(t_data *data, size_t *move);
+void	downkey_push(t_data *data, size_t *move);
 
 #endif

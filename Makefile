@@ -1,77 +1,33 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/21 16:44:57 by yohatana         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# so_long
+NAME		=	so_long
+SRCS		=	main.c check1.c check2.c map_check1.c map_check2.c game1.c game2.c
+OBJS 		=	$(SRCS:.c=.o)
+# Compiler
+CC			=	cc
+#LIBX_FLAGS	=	-lmlx_Linux -lXext -lX11
+LIBX_FLAGS	=	-lXext -lX11
+CFLAGS		=	-Wall -Wextra -Werror
 
-# name
-NAME		= so_long
+# Rules
+all:			$(NAME)
 
-# src files
-SRCS		=\
-				get_next_line/get_next_line.c\
-				get_next_line/get_next_line_utils.c\
-				main.c\
-				map_check.c\
-				map_check_helper.c\
-				collect_list.c\
-				create_struct.c\
-				error.c
-
-
-# object file name
-OBJS		= $(SRCS:.c=.o)
-
-# compile flag
-CC			= cc
-CCFLAGS		= -Wall -Wextra -Werror
-
-# Archive and remove command
-AR			= ar rcs
-RM			= rm -f
-
-.DEFAULT:	all
-
-all:		$(NAME)
-
-# libft
-LIBFT = libft
-$(LIBFT)/libft.a:
-		make -C $(LIBFT)
-
-# printf
-PRINTF = printf
-$(PRINTF)/libftprintf.a:
-		make -C $(PRINTF)
-
-# minilibX
-MLX = minilibx-linux
-$(MLX)/libmlx_Linux.a:
-		make -C $(MLX)
-
-%.o: %.c
-		$(CC) $(CCFLAGS) -I$(LIBFT) -I$(PRINTF) -I$(MLX) -c $< -o $@
-
-${NAME}:	${OBJS} $(MLX)/libmlx_Linux.a $(PRINTF)/libftprintf.a $(LIBFT)/libft.a
-			$(CC) ${OBJS} -L$(LIBFT) -lft -L$(PRINTF) -lftprintf -L$(MLX) -lmlx -lm -lXext -lX11 -o $(NAME)
+$(NAME):		$(OBJS)
+			make -C libft
+			make -C minilibx-linux
+			$(CC) $(OBJS) $(LIBX_FLAGS) $(CFLAGS) get_next_line.c get_next_line_utils.c libft/libft.a minilibx-linux/libmlx_Linux.a -o $(NAME)
 
 clean:
-			make -C $(PRINTF) clean
-			make -C $(LIBFT) clean
-			make -C $(MLX) clean
-			${RM} $(OBJS)
+			make fclean -C libft
+			$(RM) $(OBJS)
 
-fclean:		clean
-			make -C $(LIBFT) fclean
-			make -C $(PRINTF) fclean
-			${RM} $(NAME)
+fclean:			clean
+			$(RM) $(NAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+norm:
+			norminette so_long.h
+			norminette $(SRCS)
+
+.PHONY:			all clean fclean re
+
