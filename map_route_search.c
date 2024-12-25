@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:40:54 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/25 20:51:55 by yohatana         ###   ########.fr       */
+/*   Updated: 2024/12/25 21:15:15 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,33 @@ int	map_route_search(t_map *map)
 {
 	int			result;
 	t_collect	*object;
+	int			**route_map;
+	int			k;
 
 	result = 0;
-	// PからCまでのルートを探索する
-	// 探索用のマップは最初、すべて-1で埋められている
-	int	**route_map;
-	int	k = 0;
-
+	k = 0;
 	route_map = (int **)ft_calloc(sizeof(int *), map->hight);
-
 	if (!route_map)
-		return (0);
+		error(map, "malloc error");
 	while (k < map->width)
 	{
 		route_map[k] = (int *)ft_calloc(sizeof(int), map->width);
 		if (!route_map[k])
-			return (0);
+			error(map, "malloc error");
 		k++;
 	}
 	map->route_map = route_map;
 	object = *(map->c_list);
 	while (object != NULL)
 	{
-		printf("t_collect *: %p object->next : %p\n", object, object->next);
 		result = route_search_c(map, object, map->player->x, map->player->y);
 		if (result == 0)
 			error(map, ": No route to 'C', check map");
 		object->check_flg = ON;
 		object = object->next;
-		// 探索用のマップを初期化する
 		route_map_init(map);
 	}
 
-	// route_search(map, 'E', 'P'の場所);
 	result = route_search_e(map, map->exit, map->player->x, map->player->y);
 	if (result == 0)
 		error(map, "No route to 'E', check map");
@@ -69,9 +63,7 @@ static void	route_map_init(t_map *map)
 		j = 0;
 		while (j < map->width)
 		{
-			// printf("i: %d j: %d\n", i, j);
 			map->route_map[i][j] = 0;
-			// printf("map->route_map[i][j]: %d\n", map->route_map[i][j]);
 			j++;
 		}
 		i++;
