@@ -6,82 +6,110 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/25 18:56:36 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:04:26 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
+#include"struct.h"
 
-static char	**map_read(int fd);
-static int	map_name_check(char *map_name);
+static int	wall_check(t_map *map);
+static int	count_char(t_map *map, char c, int x, int y);
 
 int	map_check(char *map_name, t_map *map)
 {
-	int		fd;
-	char	*path;
+	(void)map_name;
 
-	if (map_name_check(map_name) == OK)
+	map->width = (int)ft_strlen(map->map_str[0]);
+	map->hight = get_map_hight(map);
+	if (!wall_check(map))
+		return (0);
+	if (map_charactaer_check(map) == OK)
 	{
-		path = ft_strjoin(MAP_PATH, map_name);
-		if (!path)
-			return (0);
-		printf("map path: %s\n", path);
-		fd = open(path, O_RDONLY);
-		printf("fd %d\n", fd);
-		if (fd == -1)
-			perror("open file faild");
-		map->map_str = map_read(fd);
-
-		printf("-------\n");
-		for (int i =0; i < 3;i++)
-			printf("%s\n", map->map_str[i]);
-		printf("-------\n");
-
-		if (map_charactaer_check(map) == OK)
-		{
-			printf("ok\n");
-			// game start
-		}
-		close(fd);
-		free(path);
+		printf("ok\n");
+		// game start
 	}
-	else
-		error(map, "map name is not <.ber> end");
 	return (1);
 }
 
-static char	**map_read(int fd)
-{
-	char	**map;
-	char	map_temp[MAP_MAX_LIMIT];
-	size_t	byte;
-
-	byte = read(fd, map_temp, MAP_MAX_LIMIT);
-	printf("read byte : %zu\n", byte);
-	map = ft_split(map_temp, '\n');
-	return (map);
-}
-
-// return 0 is NG
-static int	map_name_check(char *map_name)
-{
-	size_t	len;
-	char	*pointer;
-
-	len = ft_strlen(map_name);
-	pointer = ft_strnstr(map_name, BER_EXTE, len);
-	if (pointer == &map_name[len - 4])
-		return (1);
-	else
-		return (0);
-}
-
-int	get_map_hight(t_map *map)
+int	map_charactaer_check(t_map *map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (map->map_str[i] != NULL)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (count_char(map, map->map_str[i][j], j, i) == 0)
+				map_error(map, "Error\n : this is not map char");
+			j++;
+		}
 		i++;
-	return (i);
+	}
+	if (map->count->p != 1 || map->count->e != 1 || map->count->c < 1)
+	{
+		map_error(map, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
+		return (0);
+	}
+	printf("map_charactaer_check\n");
+	// printf("P :%d C :%d E :%d\n", map->count->p, map->count->c, map->count->e);
+	map_route_search(map);
+	printf("map_route_seach end\n");
+	return (1);
 }
+
+static int	wall_check(t_map *map)
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	i = 0;
+	while (i < map->hight)
+	{
+		line = map->map_str[i];
+		if (i == 0 || i == map->hight -1)
+		{
+			j = 0;
+			while (line[j] != '\0')
+			{
+				if (line[j] != WALL)
+					return (0);
+				j++;
+			}
+		}
+		if (line[0] != WALL || line[ft_strlen(line) - 1] != WALL)
+			return (0);
+		i++;
+	}
+	i = 0;
+	return (1);
+}
+
+static int	count_char(t_map *map, char c, int x, int y)
+{
+	if (c != 'P' && c != 'E' && c != 'C' && c != WALL && c != SPACE)
+		return (0);
+	if (c == 'P')
+	{
+		map->count->p = map->count->p + 1;
+		map->player->x = x;
+		map->player->y = y;
+	}
+	if (c == 'E')
+	{
+		map->count->e = map->count->e + 1;
+		map->exit->x = x;
+		map->exit->y = y;
+	}
+	if (c == 'C')
+	{
+		map->count->c = map->count->c + 1;
+		map->c_list = add_node(create_new(x, y), map->c_list);
+	}
+	return (1);
+}
+

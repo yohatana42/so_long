@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 16:40:21 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/11 15:13:02 by yohatana         ###   ########.fr       */
+/*   Created: 2025/01/11 15:01:28 by yohatana          #+#    #+#             */
+/*   Updated: 2025/01/12 13:59:42 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-#include "game.h"
+#ifndef GAME_H
+# define GAME_H
 
-void	map_error(t_map *map, char *str)
-{
-	write(2, "Error\n", 6);
-	// perror(str);
-	write(2, str, ft_strlen(str));
-	map_free(map);
-	exit(EXIT_FAILURE);
-}
+# include "so_long.h"
+# include "struct.h"
 
-void	mlx_error(t_mlx *mlx_data, char *str)
-{
-	write(2, "Error\n", 6);
-	perror(str);
-	free(mlx_data);
-	exit(EXIT_FAILURE);
-}
+# define ERROR -1
+# define OFF 0
+# define ON 1
+# define NG 0
+# define OK 1
+
+
+// int	game_init(t_map *map);
+
+#endif

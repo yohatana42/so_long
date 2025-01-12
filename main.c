@@ -6,11 +6,12 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/23 22:05:49 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/12 14:11:55 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
+#include"struct.h"
 
 int	main(int argc, char **argv)
 {
@@ -22,17 +23,17 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		printf("argc = 2\n");
-		map = create_struct(map);
+		map = create_map_struct(map);
 		if (!map)
-		{
-			perror("malloc failed");
-			all_free(map);
-		}
-		if (map_check(argv[1], map) == NG)
+			map_error(map, "malloc failed");
+		if (validation_check(argv[1], map) == NG)
 			return (EXIT_FAILURE);
+		if (map_check(argv[1], map) == NG)
+			map_error(map, "not playable map");
 		// mlx hook
+		// game_init(map);
 		// print
-		all_free(map);
+		map_free(map);
 	}
 	else
 	{

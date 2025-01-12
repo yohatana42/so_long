@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2024/12/25 20:42:20 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/12 13:55:47 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,15 @@ SRCS		=\
 				get_next_line/get_next_line.c\
 				get_next_line/get_next_line_utils.c\
 				main.c\
+				validation_check.c\
 				map_check.c\
 				map_check_helper.c\
 				collect_list.c\
-				create_struct.c\
+				create_map_struct.c\
 				error.c\
-				map_route_search.c
+				map_route_search.c\
+				game_init.c\
+				create_mlx_struct.c
 
 
 # object file name
