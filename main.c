@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/12 14:11:55 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:29:01 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_map		*map;
 
-	map = (t_map *)malloc(sizeof(t_map) * 1);
+	map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		perror("malloc failed\n");
 	if (argc == 2)

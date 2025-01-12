@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_struct.c                                    :+:      :+:    :+:   */
+/*   create_map_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:40:41 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/28 19:06:15 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:31:36 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ t_map	*create_map_struct(t_map *map)
 	t_exit		*exit;
 	t_collect	**c_list;
 
-	count = (t_count *)malloc(sizeof(t_count) * 1);
+	count = (t_count *)ft_calloc(sizeof(t_count), 1);
 	if (!count)
 		return (NULL);
-	player = (t_player *)malloc(sizeof(t_player) * 1);
+	player = (t_player *)ft_calloc(sizeof(t_player), 1);
 	if (!player)
 		return (NULL);
-	exit = (t_exit *)malloc(sizeof(t_exit) * 1);
+	exit = (t_exit *)ft_calloc(sizeof(t_exit), 1);
 	if (!exit)
 		return (NULL);
-	c_list = (t_collect **)malloc(sizeof(t_collect *) * 1);
+	c_list = (t_collect **)ft_calloc(sizeof(t_collect *), 1);
 	if (!c_list)
 		return (NULL);
 	map->count = count;
