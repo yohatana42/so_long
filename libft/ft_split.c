@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yohatana <yohatana@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:22:19 by yohatana          #+#    #+#             */
-/*   Updated: 2024/05/19 16:26:17 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:51:54 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	int		answer;
 
+	count_w = 0;
+	result = NULL;
+	answer = 0;
 	if (s == NULL)
 		return (NULL);
 	count_w = count_word(s, c);
 	j = 0;
 	i = 0;
-	result = (char **)malloc(sizeof(char *) * (count_w + 1));
+	// result = (char **)malloc(sizeof(char *) * (count_w + 1));
+	result = (char **)ft_calloc(sizeof(char *), count_w + 1);
 	if (result == NULL)
 		return (NULL);
 	answer = word_split(result, s, c, count_w);
@@ -74,6 +78,7 @@ static int	word_split(char **result, char const *s, char sep, int count_w)
 
 	start = 0;
 	index = 0;
+	count = 0;
 	while (s[start] != '\0' && index < count_w)
 	{
 		if (s[start] != sep)
@@ -98,7 +103,8 @@ static char	*word_copy(int start, int count, char const *s)
 	int		j;
 	char	*word;
 
-	word = (char *)malloc(count + 1);
+	word = NULL;
+	word = (char *)ft_calloc(count + 1, 1);
 	if (word == NULL)
 		return (NULL);
 	j = 0;
@@ -123,22 +129,3 @@ static void	result_free(char	**result)
 	}
 	free(result);
 }
-
-// #include<stdio.h>
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q a.out");
-// }
-// int main()
-// {
-// 	char **test = ft_split("hello!", ' ');
-// 	for(int i = 0;test[i] != NULL;i++)
-// 	{
-// 		printf("%s\n",test[i]);
-// 	}
-// 	for(int i = 0;test[i] != NULL;i++)
-// 	{
-// 		free(test[i]);
-// 	}
-// 	free(test);
-// }

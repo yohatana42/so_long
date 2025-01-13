@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2025/01/12 13:55:47 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/13 19:03:51 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS		=\
 				error.c\
 				map_route_search.c\
 				game_init.c\
-				create_mlx_struct.c
+				create_game_struct.c
 
 
 # object file name

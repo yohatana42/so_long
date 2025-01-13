@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/10 15:33:21 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:17:36 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	validation_check(char *map_name, t_map *map)
 {
 	int		fd;
 	char	*path;
+
 	if (map_name_check(map_name) == OK)
 	{
 		path = ft_strjoin(MAP_PATH, map_name);
 		if (!path)
 			return (0);
-		printf("map path: %s\n", path);
+		printf("path: %s\n", path);
 		fd = open(path, O_RDONLY);
 		printf("fd %d\n", fd);
 		if (fd == -1)
 			map_error(map, "open file faild");
 		map->map_str = map_read(fd);
-
 		printf("-------\n");
 		for (int i =0; i < 3;i++)
 			printf("%s\n", map->map_str[i]);
@@ -49,9 +49,12 @@ static char	**map_read(int fd)
 	char	map_temp[MAP_MAX_LIMIT];
 	size_t	byte;
 
+	map = NULL;
+	ft_bzero(map_temp, MAP_MAX_LIMIT);
 	byte = read(fd, map_temp, MAP_MAX_LIMIT);
 	printf("read byte : %zu\n", byte);
 	map = ft_split(map_temp, '\n');
+	// map = NULL;
 	return (map);
 }
 

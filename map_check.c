@@ -6,12 +6,11 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/12 14:04:26 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:57:50 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
-#include"struct.h"
 
 static int	wall_check(t_map *map);
 static int	count_char(t_map *map, char c, int x, int y);
@@ -49,7 +48,7 @@ int	map_charactaer_check(t_map *map)
 		}
 		i++;
 	}
-	if (map->count->p != 1 || map->count->e != 1 || map->count->c < 1)
+	if (map->count_p != 1 || map->count_e != 1 || map->count_c < 1)
 	{
 		map_error(map, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
 		return (0);
@@ -95,19 +94,19 @@ static int	count_char(t_map *map, char c, int x, int y)
 		return (0);
 	if (c == 'P')
 	{
-		map->count->p = map->count->p + 1;
+		map->count_p = map->count_p + 1;
 		map->player->x = x;
 		map->player->y = y;
 	}
 	if (c == 'E')
 	{
-		map->count->e = map->count->e + 1;
+		map->count_e = map->count_e + 1;
 		map->exit->x = x;
 		map->exit->y = y;
 	}
 	if (c == 'C')
 	{
-		map->count->c = map->count->c + 1;
+		map->count_c = map->count_c + 1;
 		map->c_list = add_node(create_new(x, y), map->c_list);
 	}
 	return (1);

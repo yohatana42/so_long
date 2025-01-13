@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/12 13:59:56 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 19:09:48 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "libft/libft.h"
 # include "printf/libftprintf.h"
 # include <math.h>
-# include "struct.h"
-# include "game.h"
 
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -39,58 +37,80 @@
 # define MAP_MAX_LIMIT 5000
 # define WALL '1'
 # define SPACE '0'
+# define IMG_H 30
+# define IMG_W 30
+# define WIN_H 500
+# define WIN_W 1000
 
-// typedef struct s_collect	t_collect;
+typedef struct s_collect	t_collect;
 
-// typedef struct s_count
-// {
-// 	int		p;
-// 	int		c;
-// 	int		e;
-// }		t_count;
+typedef struct s_place
+{
+	int		x;
+	int		y;
+}		t_place;
 
-// typedef struct s_player
-// {
-// 	int		x;
-// 	int		y;
-// 	void	*img;
-// 	char	*path;
-// 	int		img_w;
-// 	int		img_h;
-// }		t_player;
+typedef struct s_player
+{
+	int		x;
+	int		y;
+}		t_player;
 
-// typedef struct s_exit
-// {
-// 	int		x;
-// 	int		y;
-// 	void	*img;
-// 	char	*path;
-// 	int		img_w;
-// 	int		img_h;
-// }		t_exit;
+typedef struct s_exit
+{
+	int		x;
+	int		y;
+}		t_exit;
 
-// typedef struct s_collect
-// {
-// 	int			x;
-// 	int			y;
-// 	int			get_flg;
-// 	int			check_flg;
-// 	void		*img;
-// 	char		*path;
-// 	t_collect	*next;
-// }		t_collect;
+typedef struct s_collect
+{
+	int			x;
+	int			y;
+	int			get_flg;
+	t_collect	*next;
+}		t_collect;
 
-// typedef struct s_map
-// {
-// 	t_player	*player;
-// 	t_collect	**c_list;
-// 	t_exit		*exit;
-// 	char		**map_str;
-// 	int			width;
-// 	int			hight;
-// 	int			**route_map;
-// 	t_count		*count;
-// }		t_map;
+typedef struct s_struct_all
+{
+	int			x;
+	int			y;
+	int			get_flg;
+	t_collect	*next;
+}		t_struct_all;
+
+
+typedef struct s_map
+{
+	t_player	*player;
+	t_collect	**c_list;
+	t_exit		*exit;
+	char		**map_str;
+	int			width;
+	int			hight;
+	int			**route_map;
+	// t_count		*count;
+	int			count_p;
+	int			count_c;
+	int			count_e;
+}		t_map;
+
+typedef	struct	s_game_img
+{
+	void	*player;
+	void	*collect;
+	void	*exit;
+	void	*wall;
+	void	*floor;
+}	t_game_img;
+
+typedef	struct	s_game
+{
+	void		*mlx;
+	void		*win;
+	t_game_img *game_img;
+}	t_game;
+
+
 
 // main
 
@@ -127,9 +147,9 @@ int			game_init(t_map *map);
 void		map_error(t_map *map, char *str);
 
 // game_init
-int	game_init(t_map *map);
+int			game_init(t_map *map);
 
 // create_mlx_struct
-t_mlx	*create_mlx_struct(void);
+t_game		*create_game_struct(void);
 
 #endif

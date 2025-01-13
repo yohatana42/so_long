@@ -6,12 +6,11 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:40:54 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/12 14:11:05 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:49:49 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
-#include"struct.h"
 
 static void	route_map_init(t_map *map);
 

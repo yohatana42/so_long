@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:29:26 by yohatana          #+#    #+#             */
-/*   Updated: 2024/12/25 18:54:12 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:18:51 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_collect	*create_new(int x, int y)
 {
 	t_collect	*c;
 
-	c = (t_collect *)malloc(sizeof(t_collect) * 1);
+	c = (t_collect *)ft_calloc(sizeof(t_collect), 2);
 	c->x = x;
 	c->y = y;
 	c->next = NULL;
 	c->get_flg = OFF;
-	c->check_flg = OFF;
+	// c->check_flg = OFF;
 	return (c);
 }
 

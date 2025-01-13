@@ -6,12 +6,11 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:50:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/12 13:53:38 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:47:57 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include"struct.h"
 
 int	get_map_hight(t_map *map)
 {
