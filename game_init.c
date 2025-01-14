@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:43:22 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 19:08:01 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:40:18 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	key_hook(int keycode, t_game *mlx);
 int	render_next_frame(t_game *mlx);
 int	print(t_game *mlx, int keysym);
 
-t_game	*create_mlx_struct(void);
+// t_game	*create_mlx_struct(void);
 
 int on_destroy(t_game *game)
 {
@@ -47,7 +47,7 @@ int	print(t_game *mlx, int keysym)
 
 }
 
-int	game_init(t_map *map)
+int	game_init(t_struct_all *all)
 {
 	//TODO
 	/*
@@ -55,30 +55,31 @@ int	game_init(t_map *map)
 	・imgをおのおの用意する
 	*/
 
-	t_game *game;
+	// t_game *game;
 	int		result;
 
-	game = create_game_struct();
+	// game = create_game_struct();
 
 	// 画像をセット
-	result = set_img(map, game);
+	result = set_img(all->map, all->game);
 
 	// 画像表示
 	// void	print_img(map, mlx);
 	// mlx_put_image_to_window(mlx->mlx, mlx->win, map->player->img, 0, 0);
 
 	// 左上のバツボタンを押したとき
-	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, on_destroy, game);
+	mlx_hook(all->game->win, DestroyNotify,
+			StructureNotifyMask, on_destroy, all->game);
 
 	// 終了処理
 	// mlx_destroy_display(mlx->mlx);
 	// mlx_destroy_window(mlx->mlx, mlx->win);
 
 	// キーボードのイベントが発生したときに呼び出される関数を設定する
-	mlx_key_hook(game->win, &key_hook, game);
+	mlx_key_hook(all->game->win, &key_hook, all->game);
 
 	// こいつに入ると何もできんくなるらしい
-	mlx_loop(game->mlx);
+	mlx_loop(all->game->mlx);
 	return (0);
 }
 

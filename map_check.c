@@ -6,24 +6,24 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 16:57:50 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:11:39 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
 static int	wall_check(t_map *map);
-static int	count_char(t_map *map, char c, int x, int y);
+static int	count_char(t_struct_all *all, char c, int x, int y);
+static int	map_charactaer_check(t_struct_all *all);
 
-int	map_check(char *map_name, t_map *map)
+// int	map_check(char *map_name, t_map *map)
+int	map_check(t_struct_all *all)
 {
-	(void)map_name;
-
-	map->width = (int)ft_strlen(map->map_str[0]);
-	map->hight = get_map_hight(map);
-	if (!wall_check(map))
+	all->map->width = (int)ft_strlen(all->map->map_str[0]);
+	all->map->hight = get_map_hight(all->map);
+	if (!wall_check(all->map))
 		return (0);
-	if (map_charactaer_check(map) == OK)
+	if (map_charactaer_check(all) == OK)
 	{
 		printf("ok\n");
 		// game start
@@ -31,32 +31,30 @@ int	map_check(char *map_name, t_map *map)
 	return (1);
 }
 
-int	map_charactaer_check(t_map *map)
+static int	map_charactaer_check(t_struct_all *all)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (map->map_str[i] != NULL)
+	while (all->map->map_str[i] != NULL)
 	{
 		j = 0;
-		while (j < map->width)
+		while (j < all->map->width)
 		{
-			if (count_char(map, map->map_str[i][j], j, i) == 0)
-				map_error(map, "Error\n : this is not map char");
+			if (count_char(all, all->map->map_str[i][j], j, i) == 0)
+				error_exit(all, "Error\n : this is not map char");
 			j++;
 		}
 		i++;
 	}
-	if (map->count_p != 1 || map->count_e != 1 || map->count_c < 1)
+	if (all->map->count_p != 1 || all->map->count_e != 1
+		|| all->map->count_c < 1)
 	{
-		map_error(map, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
+		error_exit(all, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
 		return (0);
 	}
-	printf("map_charactaer_check\n");
-	// printf("P :%d C :%d E :%d\n", map->count->p, map->count->c, map->count->e);
-	map_route_search(map);
-	printf("map_route_seach end\n");
+	map_route_search(all);
 	return (1);
 }
 
@@ -88,26 +86,28 @@ static int	wall_check(t_map *map)
 	return (1);
 }
 
-static int	count_char(t_map *map, char c, int x, int y)
+static int	count_char(t_struct_all *all, char c, int x, int y)
 {
+	(void)x;
+	(void)y;
 	if (c != 'P' && c != 'E' && c != 'C' && c != WALL && c != SPACE)
 		return (0);
 	if (c == 'P')
 	{
-		map->count_p = map->count_p + 1;
-		map->player->x = x;
-		map->player->y = y;
+		all->map->count_p = all->map->count_p + 1;
+		all->game->player->x = x;
+		all->game->player->y = y;
 	}
 	if (c == 'E')
 	{
-		map->count_e = map->count_e + 1;
-		map->exit->x = x;
-		map->exit->y = y;
+		all->map->count_e = all->map->count_e + 1;
+		all->game->exit->x = x;
+		all->game->exit->y = y;
 	}
 	if (c == 'C')
 	{
-		map->count_c = map->count_c + 1;
-		map->c_list = add_node(create_new(x, y), map->c_list);
+		all->map->count_c = all->map->count_c + 1;
+		all->game->c_list = add_node(create_new(x, y), all->game->c_list);
 	}
 	return (1);
 }

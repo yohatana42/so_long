@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:40:54 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 18:49:49 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:31:45 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	route_map_init(t_map *map);
 
-int	map_route_search(t_map *map)
+int	map_route_search(t_struct_all *all)
 {
 	int			result;
 	t_collect	*object;
@@ -23,31 +23,32 @@ int	map_route_search(t_map *map)
 
 	result = 0;
 	k = 0;
-	route_map = (int **)ft_calloc(sizeof(int *), map->hight);
+	route_map = (int **)ft_calloc(sizeof(int *), all->map->hight);
 	if (!route_map)
-		map_error(map, "malloc error");
-	while (k < map->width)
+		error_exit(all, "malloc error");
+	while (k < all->map->width)
 	{
-		route_map[k] = (int *)ft_calloc(sizeof(int), map->width);
+		route_map[k] = (int *)ft_calloc(sizeof(int), all->map->width);
 		if (!route_map[k])
-			map_error(map, "malloc error");
+			error_exit(all, "malloc error");
 		k++;
 	}
-	map->route_map = route_map;
-	object = *(map->c_list);
+	all->map->route_map = route_map;
+	object = *(all->game->c_list);
 	while (object != NULL)
 	{
-		result = route_search_c(map, object, map->player->x, map->player->y);
+		result = route_search_c(all->map, object,
+				all->game->player->x, all->game->player->y);
 		if (result == 0)
-			map_error(map, ": No route to 'C', check map");
+			error_exit(all, ": No route to 'C', check map");
 		object = object->next;
-		route_map_init(map);
-		printf("routemapinit\n");
+		route_map_init(all->map);
 	}
 	printf("result %d\n", result);
-	result = route_search_e(map, map->exit, map->player->x, map->player->y);
+	result = route_search_e(all->map, all->game->exit,
+			all->game->player->x, all->game->player->y);
 	if (result == 0)
-		map_error(map, "No route to 'E', check map");
+		error_exit(all, "No route to 'E', check map");
 	return (1);
 }
 

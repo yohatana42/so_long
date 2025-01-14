@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 19:09:06 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:09:41 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 int	main(int argc, char **argv)
 {
-	t_map		*map;
+	t_struct_all	*all;
 
-	map = (t_map *)ft_calloc(sizeof(t_map), 2);
-	if (!map)
-		perror("malloc failed\n");
+	all = (t_struct_all *)ft_calloc(sizeof(t_struct_all), 1);
+	if (!all)
+		error_exit(NULL, "malloc faled");
 	if (argc == 2)
 	{
 		printf("argc = 2\n");
-		map = create_map_struct(map);
-		if (!map)
-			map_error(map, "malloc failed");
-		if (validation_check(argv[1], map) == NG)
+		all = create_struct(all);
+		if (!all)
+			error_exit(NULL, "malloc faled");
+		if (validation_check(argv[1], all) == NG)
 			return (EXIT_FAILURE);
-		if (map_check(argv[1], map) == NG)
-			map_error(map, "not playable map");
+		if (map_check(all) == NG)
+			error_exit(all, "not playable map");
 
 		// mlx hook
-		game_init(map);
+		game_init(all);
+
+
+		// game_exec();
 		// print
-		map_free(map);
+		// free_map(struct_all->map);
+		free_struct_all(all);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 19:09:48 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:15:52 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
 # include "printf/libftprintf.h"
+# include "get_next_line/get_next_line.h"
 # include <math.h>
 
 # include <X11/X.h>
@@ -41,14 +42,9 @@
 # define IMG_W 30
 # define WIN_H 500
 # define WIN_W 1000
+# define BUF_SIZE 42
 
 typedef struct s_collect	t_collect;
-
-typedef struct s_place
-{
-	int		x;
-	int		y;
-}		t_place;
 
 typedef struct s_player
 {
@@ -70,25 +66,12 @@ typedef struct s_collect
 	t_collect	*next;
 }		t_collect;
 
-typedef struct s_struct_all
-{
-	int			x;
-	int			y;
-	int			get_flg;
-	t_collect	*next;
-}		t_struct_all;
-
-
 typedef struct s_map
 {
-	t_player	*player;
-	t_collect	**c_list;
-	t_exit		*exit;
 	char		**map_str;
 	int			width;
 	int			hight;
 	int			**route_map;
-	// t_count		*count;
 	int			count_p;
 	int			count_c;
 	int			count_e;
@@ -108,24 +91,30 @@ typedef	struct	s_game
 	void		*mlx;
 	void		*win;
 	t_game_img *game_img;
+	t_player	*player;
+	t_collect	**c_list;
+	t_exit		*exit;
 }	t_game;
 
-
+typedef struct s_struct_all
+{
+	t_map		*map;
+	t_game		*game;
+}		t_struct_all;
 
 // main
 
 // validation_check.c
-int			validation_check(char *map_name, t_map *map);
+int			validation_check(char *map_name, t_struct_all *all);
 
 // map_check
-int			map_check(char *map_name, t_map *map);
-int			map_charactaer_check(t_map *map);
+int			map_check(t_struct_all *struct_all);
 
 // map_check_helper
 int			get_map_hight(t_map *map);
 
 // map_rote_search
-int			map_route_search(t_map *map);
+int			map_route_search(t_struct_all *all);
 int			route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
 int			search_c_helper(t_map *map, t_collect *object, int cur_x, int cur_y);
 int			route_search_e(t_map *map, t_exit *object, int cur_x, int cur_y);
@@ -136,20 +125,23 @@ t_collect	**add_node(t_collect *c, t_collect **c_list);
 t_collect	*create_new(int x, int y);
 t_collect	*get_last(t_collect **c_list);
 
-// create_sturucture
-t_map		*create_map_struct(t_map *map);
-void		map_free(t_map *map);
-
-// game_init
-int			game_init(t_map *map);
 
 // error
-void		map_error(t_map *map, char *str);
+void		error_exit(t_struct_all *all, char *str);
 
 // game_init
-int			game_init(t_map *map);
+int			game_init(t_struct_all *all);
 
-// create_mlx_struct
-t_game		*create_game_struct(void);
+// create_struct
+t_struct_all	*create_struct(t_struct_all *struct_all);
+void			free_struct_all(t_struct_all *struct_all);
+
+// create_game_struct
+t_game		*create_game_struct(t_game *game);
+void		free_game(t_game *game);
+
+// create_sturucture
+t_map		*create_map_struct(t_map *map);
+void		free_map(t_map *map);
 
 #endif

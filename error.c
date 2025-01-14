@@ -6,25 +6,18 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 16:40:21 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 19:04:19 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:36:27 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_error(t_map *map, char *str)
+void	error_exit(t_struct_all *all, char *str)
 {
-	write(2, "Error\n", 6);
-	// perror(str);
-	write(2, str, ft_strlen(str));
-	map_free(map);
-	exit(EXIT_FAILURE);
-}
-
-void	mlx_error(t_game *game, char *str)
-{
+	(void)all;
+	(void)str;
 	write(2, "Error\n", 6);
 	perror(str);
-	free(game);
+	free_struct_all(all);
 	exit(EXIT_FAILURE);
 }
