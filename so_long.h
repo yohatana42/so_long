@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 19:15:52 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:42:02 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		error_exit(t_struct_all *all, char *str);
 int			game_init(t_struct_all *all);
 
 // create_struct
-t_struct_all	*create_struct(t_struct_all *struct_all);
+t_struct_all	*create_struct(void);
 void			free_struct_all(t_struct_all *struct_all);
 
 // create_game_struct

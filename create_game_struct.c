@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:55:24 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 19:30:44 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:17:04 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,13 @@ void	free_game(t_game *game)
 {
 	if (game)
 	{
-		mlx_destroy_display(game->mlx);
 		mlx_destroy_window(game->mlx, game->win);
-
-		if (game->player)
-			free(game->player);
-		if (game->c_list)
-			free_c_list(game);
-		if (game->exit)
-			free(game->exit);
-		if (game->game_img)
-			free(game->game_img);
+		mlx_destroy_display(game->mlx);
+		free(game->player);
+		free_c_list(game);
+		free(game->exit);
+		free(game->game_img);
+		free(game->mlx);
 		free(game);
 	}
 }
