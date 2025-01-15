@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 14:42:36 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:47:31 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 			error_exit(all, "arg check please");
 		if (map_check(all) == NG)
 			error_exit(all, "not playable map");
+		game_init(all);
 	}
 	else
 	{

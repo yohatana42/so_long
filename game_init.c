@@ -6,31 +6,20 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:43:22 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 16:40:18 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 21:48:50 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
 int	set_img(t_map *map, t_game *mlx);
-void	print_img(t_map *map, t_game *mlx);
-int on_destroy(t_game *mlx);
-int	key_hook(int keycode, t_game *mlx);
+// // int on_destroy(t_struct_all *all);
+// int	key_hook(int keycode, t_game *mlx);
+
+int	key_hook(int keycode, t_struct_all *all);
 int	render_next_frame(t_game *mlx);
 int	print(t_game *mlx, int keysym);
-
-// t_game	*create_mlx_struct(void);
-
-int on_destroy(t_game *game)
-{
-	// ただ閉じるだけ
-	printf("on_destroy\n");
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game);
-	// exit(0);
-	return (0);
-}
+void	print_img(t_map *map, t_game *game);
 
 // 1ループを何フレームに設定する必要があるのか？
 int	render_next_frame(t_game *mlx)
@@ -49,34 +38,28 @@ int	print(t_game *mlx, int keysym)
 
 int	game_init(t_struct_all *all)
 {
-	//TODO
-	/*
-	・ウィンドウの構造体を作る
-	・imgをおのおの用意する
-	*/
+	// int result = 0;
+	int	win_w;
+	int	win_h;
 
-	// t_game *game;
-	int		result;
-
-	// game = create_game_struct();
+	win_w = IMG_W * all->map->width;
+	win_h = IMG_H * all->map->hight;
+	all->game->mlx = mlx_init();
+	all->game->win = mlx_new_window(all->game->mlx, win_w, win_h, "so_long");
 
 	// 画像をセット
-	result = set_img(all->map, all->game);
+	// result = set_img(all->map, all->game);
 
 	// 画像表示
-	// void	print_img(map, mlx);
-	// mlx_put_image_to_window(mlx->mlx, mlx->win, map->player->img, 0, 0);
+	// print_img(all->map, all->game);
 
 	// 左上のバツボタンを押したとき
 	mlx_hook(all->game->win, DestroyNotify,
-			StructureNotifyMask, on_destroy, all->game);
-
-	// 終了処理
-	// mlx_destroy_display(mlx->mlx);
-	// mlx_destroy_window(mlx->mlx, mlx->win);
+			StructureNotifyMask, on_destroy, all);
 
 	// キーボードのイベントが発生したときに呼び出される関数を設定する
-	mlx_key_hook(all->game->win, &key_hook, all->game);
+	// mlx_key_hook(all->game->win, &key_hook, all->game);
+	mlx_key_hook(all->game->win, &key_hook, all);
 
 	// こいつに入ると何もできんくなるらしい
 	mlx_loop(all->game->mlx);
@@ -86,50 +69,55 @@ int	game_init(t_struct_all *all)
 int	set_img(t_map *map, t_game *game)
 {
 	(void)map;
-	(void)game;
+	int	h;
+	int	w;
 
-	// wall img set
-	// mlx->wall->path = "";
-	// mlx->wall->img_h = 10;
-	// mlx->wall->img_w = 10;
-	// mlx->wall->img = mlx_xpm_file_to_image(mlx->mlx, mlx->wall->path, &mlx->wall->img_h, &mlx->wall->img_w);
-	// mlx->space->path = "";
-	// mlx->space->img_h = 10;
-	// mlx->space->img_w = 10;
-	// mlx->space->img = mlx_xpm_file_to_image(mlx->mlx, mlx->space->path, &mlx->space->img_h, &mlx->space->img_w);
-
-	// map->player->path = "./textures/MiConv.com__figure_hashiru.xpm";
-	// map->player->img_w = 10;
-	// map->player->img_h = 10;
-	// map->player->img = mlx_xpm_file_to_image(mlx->mlx, map->player->path, &map->player->img_h, &map->player->img_w);
-
-	// map->exit->path = "./textures/MiConv.com__figure_hashiru.xpm";
-	// map->exit->img_w = 10;
-	// map->exit->img_h = 10;
-	// map->exit->img = mlx_xpm_file_to_image(mlx->mlx, map->player->path, &map->player->img_h, &map->player->img_w);
-
-	// collectの数だけ構造体がある　一個一個にimg入れるのは現実的ではない
-	// map->player->img = mlx_xpm_file_to_image(mlx->mlx, map->player->path, &map->player->img_h, &map->player->img_w);
+	h = IMG_H;
+	w = IMG_W;
+	game->game_img->wall = mlx_xpm_file_to_image(game->mlx, \
+							"./textures/pattern_uroko.xpm", &h, &w);
+	// game->game_img->exit = mlx_xpm_file_to_image(game->mlx, \
+	// 						"texture/path", IMG_H, IMG_W);
+	// game->game_img->collect = mlx_xpm_file_to_image(game->mlx, \
+	// 						"texture/path", IMG_H, IMG_W);
+	// game->game_img->wall = mlx_xpm_file_to_image(game->mlx, \
+	// 						"texture/path", IMG_H, IMG_W);
+	game->game_img->floor = mlx_xpm_file_to_image(game->mlx, \
+							"./textures/pattern_shibafu.xpm", &h, &w);
 	return (0);
 }
 
 void	print_img(t_map *map, t_game *game)
 {
-	(void)map;
-	(void)game;
-	// mlx_put_image_to_window(mlx->mlx, mlx->win, map->player->img, 0, 0);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < map->hight)
+	{
+		while (map->map_str[i][j] != '\0')
+		{
+			// if (map->map_str[i][j] == '1')
+			// {
+
+			// }
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(game->mlx, game->win, game->game_img->wall, 100, 100);
+	mlx_put_image_to_window(game->mlx, game->win, game->game_img->floor, 50, 50);
 }
 
 //　キーボードが押されたときに実際に何が起きるか
-int	key_hook(int keycode, t_game *game)
+int	key_hook(int keycode, t_struct_all *all)
 {
 	// esc
 	// printf("%d \n", keycode);
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(game->mlx, game->win);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		free_struct_all(all);
 		exit(0);
 	}
 	if (keycode == 65362)
@@ -144,7 +132,15 @@ int	key_hook(int keycode, t_game *game)
 	}
 	if (keycode == 65363)
 	{
+		printf("push right\n");
+	}
+	if (keycode == 65361)
+	{
 		printf("push left\n");
+	}
+	if (keycode == 65364)
+	{
+		printf("push down\n");
 	}
 	if (keycode == 97)
 	{

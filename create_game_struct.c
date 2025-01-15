@@ -6,13 +6,14 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:55:24 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 18:41:01 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 21:41:51 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
 static void	free_c_list(t_game *game);
+static void	free_game_img(t_game *game);
 
 t_game	*create_game_struct(t_game *game)
 {
@@ -33,8 +34,6 @@ t_game	*create_game_struct(t_game *game)
 	game_img = (t_game_img *)ft_calloc(sizeof(t_game_img), 1);
 	if (!game_img)
 		return (NULL);
-	// game->mlx = mlx_init();
-	// game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "so_long");
 	game->mlx = NULL;
 	game->win = NULL;
 	game->player = player;
@@ -48,6 +47,8 @@ void	free_game(t_game *game)
 {
 	if (game)
 	{
+		if (game->game_img)
+			free_game_img(game);
 		if (game->win)
 			mlx_destroy_window(game->mlx, game->win);
 		if (game->mlx)
@@ -55,10 +56,31 @@ void	free_game(t_game *game)
 		free(game->player);
 		free_c_list(game);
 		free(game->exit);
-		free(game->game_img);
 		free(game->mlx);
 		free(game);
 	}
+}
+
+static void	free_game_img(t_game *game)
+{
+	if (game->game_img->wall)
+	{
+		mlx_destroy_image(game->mlx, game->game_img->wall);
+		// free(game->game_img->wall);
+	}
+	if (game->game_img->floor)
+	{
+		mlx_destroy_image(game->mlx, game->game_img->floor);
+		// free(game->game_img->floor);
+	}
+
+	if (game->game_img->exit)
+		mlx_destroy_image(game->mlx, game->game_img->exit);
+	if (game->game_img->player)
+		mlx_destroy_image(game->mlx, game->game_img->player);
+	if (game->game_img->collect)
+		mlx_destroy_image(game->mlx, game->game_img->collect);
+	free(game->game_img);
 }
 
 static void	free_c_list(t_game *game)

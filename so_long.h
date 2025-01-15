@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 15:18:23 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 21:38:30 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,21 @@
 # define OK 1
 # define MAP_PATH "maps/\0"
 # define BER_EXTE ".ber\0"
-# define MAP_MAX_LIMIT 5000
 # define WALL '1'
 # define SPACE '0'
-# define IMG_H 30
-# define IMG_W 30
-# define WIN_H 500
-# define WIN_W 1000
+# define IMG_H 50
+# define IMG_W 50
 # define BUF_SIZE 1000
+
+# define ESC 65307
+# define UP 65362
+# define LEFT 65361
+# define RIGHT 65363
+# define DOWN 65364
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
 typedef struct s_collect	t_collect;
 
@@ -136,6 +143,9 @@ void		error_exit(t_struct_all *all, char *str);
 
 // game_init
 int			game_init(t_struct_all *all);
+
+// game_event
+int	on_destroy(t_struct_all *all);
 
 // create_struct
 t_struct_all	*create_struct(void);
