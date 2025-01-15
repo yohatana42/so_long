@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:29:26 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 18:18:51 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:07:51 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_collect	**add_node(t_collect *c, t_collect **c_list)
 
 	if (c_list == NULL && c == NULL)
 		return (NULL);
-
 	if (*c_list == NULL)
 	{
 		*c_list = c;
@@ -38,12 +37,13 @@ t_collect	*create_new(int x, int y)
 {
 	t_collect	*c;
 
-	c = (t_collect *)ft_calloc(sizeof(t_collect), 2);
+	c = (t_collect *)ft_calloc(sizeof(t_collect), 1);
+	if (!c)
+		return (NULL);
 	c->x = x;
 	c->y = y;
 	c->next = NULL;
 	c->get_flg = OFF;
-	// c->check_flg = OFF;
 	return (c);
 }
 

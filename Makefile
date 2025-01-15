@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2025/01/14 16:38:48 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/15 15:55:34 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRCS		=\
 				map_route_search.c\
 				create_game_struct.c\
 				create_struct.c\
-				game_init.c
+				game_init.c\
+				game_event.c\
+				route_search_c.c
 
 
 # object file name
@@ -35,7 +37,7 @@ OBJS		= $(SRCS:.c=.o)
 
 # compile flag
 CC			= cc
-CCFLAGS		= -Wall -Wextra -Werror
+CCFLAGS		= -Wall -Wextra -Werror -g
 
 # Archive and remove command
 AR			= ar rcs

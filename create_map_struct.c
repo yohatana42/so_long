@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:40:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 20:28:25 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:02:32 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,22 @@ void	free_map(t_map *map)
 		return ;
 	if (map->map_str)
 	{
-		while (map->map_str[i])
-			free(map->map_str[i++]);
+		while (i < map->hight)
+		{
+			free(map->map_str[i]);
+			i++;
+		}
 		free(map->map_str);
 	}
 	i = 0;
 	if (map->route_map)
 	{
-		while (map->route_map[i])
-			free(map->route_map[i++]);
+		while (i < map->hight)
+		{
+			free(map->route_map[i]);
+			i++;
+		}
 		free(map->route_map);
 	}
 	free(map);
-	// exit(EXIT_FAILURE);
 }

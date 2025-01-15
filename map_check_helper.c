@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 18:50:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 16:47:57 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 13:52:44 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_map_hight(t_map *map)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (map->map_str[i] != NULL)
 		i++;
 	return (i);

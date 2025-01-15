@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 20:42:02 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 15:18:23 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define IMG_W 30
 # define WIN_H 500
 # define WIN_W 1000
-# define BUF_SIZE 42
+# define BUF_SIZE 1000
 
 typedef struct s_collect	t_collect;
 
@@ -115,10 +115,15 @@ int			get_map_hight(t_map *map);
 
 // map_rote_search
 int			map_route_search(t_struct_all *all);
-int			route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
-int			search_c_helper(t_map *map, t_collect *object, int cur_x, int cur_y);
+void		route_map_init(t_map *map);
+
 int			route_search_e(t_map *map, t_exit *object, int cur_x, int cur_y);
 int			search_e_helper(t_map *map, t_exit *object, int cur_x, int cur_y);
+
+// search.c
+void		search_c(t_struct_all *all);
+int			route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
+int			search_c_helper(t_map *map, t_collect *object, int cur_x, int cur_y);
 
 // c_list
 t_collect	**add_node(t_collect *c, t_collect **c_list);

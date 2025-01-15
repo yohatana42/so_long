@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 21:18:49 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:57:22 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ int	validation_check(char *map_name, t_struct_all *all)
 		count_line = get_count_line(path, all);
 		printf("count_line %d\n", count_line);
 		map_read(path, all, count_line);
-		printf("-------\n");
-		for (int i =0; i < 3;i++)
-			printf("%s", all->map->map_str[i]);
-		printf("-------\n");
-		// close(fd);
 		free(path);
 	}
 	else
@@ -51,12 +46,15 @@ static int	get_count_line(char *path, t_struct_all *all)
 	int		result;
 	int		i;
 
-	count_line = 0;
+	count_line = 1;
+	result = 0;
+	i = 0;
 	ft_bzero(str, BUF_SIZE);
 	fd = open(path, O_RDONLY);
 	while (1)
 	{
 		result = read(fd, str, BUF_SIZE);
+		printf("read result %d\n", result);
 		if (result < 0)
 		{
 			close(fd);
@@ -64,15 +62,16 @@ static int	get_count_line(char *path, t_struct_all *all)
 		}
 		else if (result == 0)
 			break ;
-		i = 0;
 		while (str[i] != '\0')
 		{
-			if (str[i] == '\n')
+			// printf("str[i] %c\n", str[i]);
+			if (str[i] == '\n' && str[i + 1] != '\0')
 				count_line++;
 			i++;
 		}
 	}
 	close(fd);
+	printf("count_line %d\n", count_line);
 	return (count_line);
 }
 
@@ -81,33 +80,33 @@ static void	map_read(char *path, t_struct_all *all, int count_line)
 	char	**map_str;
 	int		fd;
 	char	*buf;
-	int	i;
+	int		i;
+	int		j;
 
 	fd = open(path, O_RDONLY);
-	printf("path %s\n", path);
 	if (fd == -1)
 		error_exit(all, "open file faild");
-	printf("fd %d\n", fd);
-
 	map_str = (char **)ft_calloc(sizeof(char *), count_line + 1);
 	if (!map_str)
 		error_exit(all, "mallooc failed");
-	printf("map_str %p\n", map_str);
 	i = 0;
 	while (i < count_line)
 	{
 		buf = get_next_line(fd);
-		printf("map_str[i] %s", buf);
+		j = 0;
+		while (buf[j] != '\0')
+		{
+			if (buf[j] == '\n')
+				buf[j] = '\0';
+			j++;
+		}
 		map_str[i] = buf;
 		i++;
 	}
-	printf("all->map %p\n", all->map);
 	all->map->map_str = map_str;
-	printf("all->map->map_str %p\n", all->map->map_str);
 	close(fd);
 }
 
-// return 0 is NG
 static int	map_name_check(char *map_name)
 {
 	size_t	len;

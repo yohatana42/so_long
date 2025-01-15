@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/14 21:29:54 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:09:33 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@ static int	wall_check(t_map *map);
 static int	count_char(t_struct_all *all, char c, int x, int y);
 static int	map_charactaer_check(t_struct_all *all);
 
-// int	map_check(char *map_name, t_map *map)
 int	map_check(t_struct_all *all)
 {
 	all->map->width = (int)ft_strlen(all->map->map_str[0]);
+	printf("map->width %d\n", all->map->width);
 	all->map->hight = get_map_hight(all->map);
+	printf("map->hight %d\n", all->map->hight);
 	if (!wall_check(all->map))
 		return (0);
+	else
+	{
+		printf("wall check ok\n");
+	}
 	if (map_charactaer_check(all) == OK)
 	{
-		printf("ok\n");
+		printf("map_charactaer_check ok\n");
 		// game start
 	}
 	return (1);
@@ -54,6 +59,7 @@ static int	map_charactaer_check(t_struct_all *all)
 		error_exit(all, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
 		return (0);
 	}
+	printf("count char ok\n");
 	map_route_search(all);
 	return (1);
 }
@@ -64,6 +70,7 @@ static int	wall_check(t_map *map)
 	int		j;
 	char	*line;
 
+	printf("wall_check\n");
 	i = 0;
 	while (i < map->hight)
 	{
@@ -82,14 +89,13 @@ static int	wall_check(t_map *map)
 			return (0);
 		i++;
 	}
-	i = 0;
 	return (1);
 }
 
 static int	count_char(t_struct_all *all, char c, int x, int y)
 {
-	(void)x;
-	(void)y;
+	t_collect	*new;
+
 	if (c != 'P' && c != 'E' && c != 'C' && c != WALL && c != SPACE)
 		return (0);
 	if (c == 'P')
@@ -107,7 +113,10 @@ static int	count_char(t_struct_all *all, char c, int x, int y)
 	if (c == 'C')
 	{
 		all->map->count_c = all->map->count_c + 1;
-		all->game->c_list = add_node(create_new(x, y), all->game->c_list);
+		new = create_new(x, y);
+		if (!new)
+			error_exit(all, "malloc failed");
+		all->game->c_list = add_node(new, all->game->c_list);
 	}
 	return (1);
 }
