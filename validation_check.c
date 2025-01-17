@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 12:53:01 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:50:28 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	get_count_line(char *path, t_struct_all *all)
 		printf("read result %d\n", result);
 		if (result < 0)
 		{
-			close(fd);
+			free(path);
 			error_exit(all, "read error");
 		}
 		else if (result == 0)
@@ -85,7 +85,10 @@ static void	map_read(char *path, t_struct_all *all, int count_line)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
+	{
+		free(path);
 		error_exit(all, "open file faild");
+	}
 	map_str = (char **)ft_calloc(sizeof(char *), count_line + 1);
 	if (!map_str)
 		error_exit(all, "mallooc failed");
