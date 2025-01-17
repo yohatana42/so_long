@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 16:01:16 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:33:05 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,10 @@ static int	map_charactaer_check(t_struct_all *all);
 int	map_check(t_struct_all *all)
 {
 	all->map->width = (int)ft_strlen(all->map->map_str[0]);
-	printf("map->width %d\n", all->map->width);
 	all->map->hight = get_map_hight(all->map);
-	printf("map->hight %d\n", all->map->hight);
 	if (!wall_check(all->map))
 		return (0);
-	else
-	{
-		printf("wall check ok\n");
-	}
-	if (map_charactaer_check(all) == OK)
-	{
-		printf("map_charactaer_check ok\n");
-		// game start
-	}
+	map_charactaer_check(all);
 	return (1);
 }
 
@@ -48,7 +38,7 @@ static int	map_charactaer_check(t_struct_all *all)
 		while (j < all->map->width)
 		{
 			if (count_char(all, all->map->map_str[i][j], j, i) == 0)
-				error_exit(all, "Error\n : this is not map char");
+				error_exit(all, "this is not map char");
 			j++;
 		}
 		i++;
@@ -59,7 +49,6 @@ static int	map_charactaer_check(t_struct_all *all)
 		error_exit(all, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
 		return (0);
 	}
-	printf("count char ok\n");
 	map_route_search(all);
 	return (1);
 }
@@ -70,7 +59,6 @@ static int	wall_check(t_map *map)
 	int		j;
 	char	*line;
 
-	printf("wall_check\n");
 	i = 0;
 	while (i < map->hight)
 	{
@@ -120,4 +108,3 @@ static int	count_char(t_struct_all *all, char c, int x, int y)
 	}
 	return (1);
 }
-

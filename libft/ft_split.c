@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:22:19 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/13 17:51:54 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:41:45 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	**ft_split(char const *s, char c)
 	count_w = count_word(s, c);
 	j = 0;
 	i = 0;
-	// result = (char **)malloc(sizeof(char *) * (count_w + 1));
 	result = (char **)ft_calloc(sizeof(char *), count_w + 1);
 	if (result == NULL)
 		return (NULL);

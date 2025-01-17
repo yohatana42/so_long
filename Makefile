@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2025/01/15 15:55:34 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/17 20:31:17 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,10 @@ SRCS		=\
 				create_struct.c\
 				game_init.c\
 				game_event.c\
-				route_search_c.c
+				route_search_c.c\
+				validation_check_helper.c\
+				game_print.c\
+				all_collect_get_check.c
 
 
 # object file name

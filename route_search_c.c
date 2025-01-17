@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:14:43 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 15:33:38 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:48:09 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ void	search_c(t_struct_all *all)
 	t_collect	*object;
 
 	result = 0;
-	printf("all->game->c_list ptr %p\n", all->game->c_list);
-	printf("*(c_list) %p\n", *(all->game->c_list));
 	object = *(all->game->c_list);
 	while (object != NULL)
 	{
-		// result = route_search_c(all->map, object,
-		// 		all->game->player->x, all->game->player->y);
-		// if (result == 0)
-		// 	error_exit(all, ": No route to 'C', check map");
-		printf("object %p\n", object);
 		object = object->next;
 		route_map_init(all->map);
 	}
