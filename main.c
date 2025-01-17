@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 18:47:31 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:11:35 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 
 	(void)argv;
 	all = NULL;
-
 	if (argc == 2)
 	{
 		printf("argc is 2\n");

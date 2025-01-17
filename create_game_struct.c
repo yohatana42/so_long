@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:55:24 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 21:41:51 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:15:43 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,23 @@ static void	free_game_img(t_game *game)
 	if (game->game_img->wall)
 	{
 		mlx_destroy_image(game->mlx, game->game_img->wall);
-		// free(game->game_img->wall);
 	}
 	if (game->game_img->floor)
 	{
 		mlx_destroy_image(game->mlx, game->game_img->floor);
-		// free(game->game_img->floor);
 	}
-
 	if (game->game_img->exit)
+	{
 		mlx_destroy_image(game->mlx, game->game_img->exit);
+	}
 	if (game->game_img->player)
+	{
 		mlx_destroy_image(game->mlx, game->game_img->player);
+	}
 	if (game->game_img->collect)
+	{
 		mlx_destroy_image(game->mlx, game->game_img->collect);
+	}
 	free(game->game_img);
 }
 
@@ -90,14 +93,15 @@ static void	free_c_list(t_game *game)
 
 	if (!game->c_list)
 		return ;
-	if (!*(game->c_list))
-		return ;
-	collect = *(game->c_list);
-	while (collect)
+	if (*(game->c_list))
 	{
-		temp = collect->next;
-		free(collect);
-		collect = temp;
+		collect = *(game->c_list);
+		while (collect)
+		{
+			temp = collect->next;
+			free(collect);
+			collect = temp;
+		}
 	}
 	free(game->c_list);
 }
