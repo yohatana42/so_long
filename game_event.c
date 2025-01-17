@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:09 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:31:56 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 21:20:10 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,20 @@ void	move_player(t_struct_all *all, int post_x, int post_y)
 
 static void	arrive_e(t_struct_all *all)
 {
-	if (all_get_check(all))
-	{
-		mlx_string_put(all->game->mlx, all->game->win, \
-		100, 100, 1, "get all collection!");
-	}
-	else
+	if (!all_get_check(all))
 		mlx_loop_end(all->game->mlx);
 }
+
+// static void	arrive_e(t_struct_all *all)
+// {
+// 	if (all_get_check(all))
+// 	{
+// 		mlx_string_put(all->game->mlx, all->game->win,
+// 		100, 100, 1, "get all collection!");
+// 	}
+// 	else
+// 		mlx_loop_end(all->game->mlx);
+// }
 
 static void	arrive_c(t_struct_all *all, int post_x, int post_y)
 {

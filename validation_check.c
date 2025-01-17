@@ -6,16 +6,16 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:09:08 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 21:19:42 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
-// static int	get_count_line(char *path, t_struct_all *all);
 static void	map_read(char *path, t_struct_all *all, int count_line);
 static int	map_name_check(char *map_name);
 static char	*last_return_to_null(char *buf);
+static void	no_read(char *path, char *buf, t_struct_all *all);
 
 int	validation_check(char *map_name, t_struct_all *all)
 {
@@ -29,6 +29,11 @@ int	validation_check(char *map_name, t_struct_all *all)
 		if (!path)
 			return (0);
 		count_line = get_count_line(path, all);
+		if (count_line < 3)
+		{
+			free(path);
+			return (0);
+		}
 		map_read(path, all, count_line);
 		free(path);
 	}
@@ -36,36 +41,6 @@ int	validation_check(char *map_name, t_struct_all *all)
 		error_exit(all, "map name is not <.ber> end");
 	return (1);
 }
-
-// static int	get_count_line(char *path, t_struct_all *all)
-// {
-// 	int		count_line;
-// 	int		fd;
-// 	char	str[BUF_SIZE];
-// 	int		result;
-// 	int		i;
-
-// 	count_line = 1;
-// 	i = 0;
-// 	ft_bzero(str, BUF_SIZE);
-// 	fd = open(path, O_RDONLY);
-// 	while (1)
-// 	{
-// 		result = read(fd, str, BUF_SIZE);
-// 		if (result < 0)
-// 			free_path(path, all, "open file faild");
-// 		else if (result == 0)
-// 			break ;
-// 		while (str[i] != '\0')
-// 		{
-// 			if (str[i] == '\n' && str[i + 1] != '\0')
-// 				count_line++;
-// 			i++;
-// 		}
-// 	}
-// 	close(fd);
-// 	return (count_line);
-// }
 
 static void	map_read(char *path, t_struct_all *all, int count_line)
 {
@@ -87,12 +62,20 @@ static void	map_read(char *path, t_struct_all *all, int count_line)
 	while (i < count_line)
 	{
 		buf = get_next_line(fd);
+		if (ft_strlen(buf) < 1)
+			no_read(path, buf, all);
 		buf = last_return_to_null(buf);
-		map_str[i] = buf;
-		i++;
+		map_str[i++] = buf;
 	}
 	all->map->map_str = map_str;
 	close(fd);
+}
+
+static void	no_read(char *path, char *buf, t_struct_all *all)
+{
+	free(path);
+	free(buf);
+	error_exit(all, "no char in file");
 }
 
 static char	*last_return_to_null(char *buf)
@@ -108,12 +91,6 @@ static char	*last_return_to_null(char *buf)
 	}
 	return (buf);
 }
-
-// void	free_path(char *path, t_struct_all *all, char *str)
-// {
-// 	free(path);
-// 	error_exit(all, str);
-// }
 
 static int	map_name_check(char *map_name)
 {
