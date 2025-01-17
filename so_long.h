@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 21:38:30 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:19:20 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef	struct	s_game
 {
 	void		*mlx;
 	void		*win;
-	t_game_img *game_img;
+	t_game_img	*game_img;
 	t_player	*player;
 	t_collect	**c_list;
 	t_exit		*exit;
@@ -145,7 +145,8 @@ void		error_exit(t_struct_all *all, char *str);
 int			game_init(t_struct_all *all);
 
 // game_event
-int	on_destroy(t_struct_all *all);
+int			on_destroy(t_struct_all *all);
+int			key_hook(int keycode, t_struct_all *all);
 
 // create_struct
 t_struct_all	*create_struct(void);
