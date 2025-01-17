@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 18:09:33 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:01:16 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static int	count_char(t_struct_all *all, char c, int x, int y)
 {
 	t_collect	*new;
 
-	if (c != 'P' && c != 'E' && c != 'C' && c != WALL && c != SPACE)
+	if (c != 'P' && c != 'E' && c != 'C' && c != WALL && c != FLOOR)
 		return (0);
 	if (c == 'P')
 	{

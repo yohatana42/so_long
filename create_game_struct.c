@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:55:24 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 14:15:43 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:09:41 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_game	*create_game_struct(t_game *game)
 		return (NULL);
 	game->mlx = NULL;
 	game->win = NULL;
+	game->count_move = 0;
 	game->player = player;
 	game->exit = exit;
 	game->c_list = c_list;

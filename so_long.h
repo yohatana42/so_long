@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 12:19:20 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:04:12 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define MAP_PATH "maps/\0"
 # define BER_EXTE ".ber\0"
 # define WALL '1'
-# define SPACE '0'
+# define FLOOR '0'
 # define IMG_H 50
 # define IMG_W 50
 # define BUF_SIZE 1000
@@ -97,6 +97,7 @@ typedef	struct	s_game
 {
 	void		*mlx;
 	void		*win;
+	int			count_move;
 	t_game_img	*game_img;
 	t_player	*player;
 	t_collect	**c_list;
@@ -143,10 +144,13 @@ void		error_exit(t_struct_all *all, char *str);
 
 // game_init
 int			game_init(t_struct_all *all);
+int			print_collect(t_struct_all *all);
 
 // game_event
 int			on_destroy(t_struct_all *all);
 int			key_hook(int keycode, t_struct_all *all);
+void	move_player(t_struct_all *all, int post_x, int post_y);
+void	print_player(t_struct_all *all, int cur_x, int cur_y);
 
 // create_struct
 t_struct_all	*create_struct(void);
