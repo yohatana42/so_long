@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:43:22 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:22:40 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:36:15 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	game_init(t_struct_all *all)
 	win_h = IMG_H * all->map->hight;
 	all->game->mlx = mlx_init();
 	all->game->win = mlx_new_window(all->game->mlx, win_w, win_h, "so_long");
-
 	set_img(all);
 	print_img(all);
 	mlx_hook(all->game->win, DestroyNotify, \

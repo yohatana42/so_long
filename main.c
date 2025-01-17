@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:23:35 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/17 20:36:33 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int	main(int argc, char **argv)
 	free_struct_all(all);
 	return (0);
 }
-
