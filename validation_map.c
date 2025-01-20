@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   validation_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:33:05 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:59:17 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
-static int	wall_check(t_map *map);
+static int	validation_wall(t_map *map);
 static int	count_char(t_struct_all *all, char c, int x, int y);
-static int	map_charactaer_check(t_struct_all *all);
+static int	validation_map_charactaer(t_struct_all *all);
 
-int	map_check(t_struct_all *all)
+int	validation_map(t_struct_all *all)
 {
 	all->map->width = (int)ft_strlen(all->map->map_str[0]);
 	all->map->hight = get_map_hight(all->map);
-	if (!wall_check(all->map))
+	if (!validation_wall(all->map))
 		return (0);
-	map_charactaer_check(all);
+	validation_map_charactaer(all);
 	return (1);
 }
 
-static int	map_charactaer_check(t_struct_all *all)
+static int	validation_map_charactaer(t_struct_all *all)
 {
 	int	i;
 	int	j;
@@ -53,7 +53,7 @@ static int	map_charactaer_check(t_struct_all *all)
 	return (1);
 }
 
-static int	wall_check(t_map *map)
+static int	validation_wall(t_map *map)
 {
 	int		i;
 	int		j;

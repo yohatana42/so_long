@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_check.c                                 :+:      :+:    :+:   */
+/*   validation_argument.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 21:19:42 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:50:27 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
 static void	map_read(char *path, t_struct_all *all, int count_line);
-static int	map_name_check(char *map_name);
+static int	validation_map_name(char *map_name);
 static char	*last_return_to_null(char *buf);
-static void	no_read(char *path, char *buf, t_struct_all *all);
+static void	nothing_read(char *path, char *buf, t_struct_all *all);
 
-int	validation_check(char *map_name, t_struct_all *all)
+int	validation_argument(char *map_name, t_struct_all *all)
 {
 	char	*path;
 	int		count_line;
 
 	count_line = 0;
-	if (map_name_check(map_name) == OK)
+	if (validation_map_name(map_name) == OK)
 	{
 		path = ft_strjoin(MAP_PATH, map_name);
 		if (!path)
@@ -63,7 +63,7 @@ static void	map_read(char *path, t_struct_all *all, int count_line)
 	{
 		buf = get_next_line(fd);
 		if (ft_strlen(buf) < 1)
-			no_read(path, buf, all);
+			nothing_read(path, buf, all);
 		buf = last_return_to_null(buf);
 		map_str[i++] = buf;
 	}
@@ -71,7 +71,7 @@ static void	map_read(char *path, t_struct_all *all, int count_line)
 	close(fd);
 }
 
-static void	no_read(char *path, char *buf, t_struct_all *all)
+static void	nothing_read(char *path, char *buf, t_struct_all *all)
 {
 	free(path);
 	free(buf);
@@ -92,7 +92,7 @@ static char	*last_return_to_null(char *buf)
 	return (buf);
 }
 
-static int	map_name_check(char *map_name)
+static int	validation_map_name(char *map_name)
 {
 	size_t	len;
 	char	*pointer;

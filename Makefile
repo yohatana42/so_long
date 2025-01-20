@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2025/01/17 20:31:17 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/20 17:01:31 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ NAME		= so_long
 SRCS		=\
 				get_next_line/get_next_line.c\
 				get_next_line/get_next_line_utils.c\
-				main.c\
-				validation_check.c\
-				map_check.c\
-				map_check_helper.c\
+				validation_argument.c\
+				validation_map.c\
+				validation_map_helper.c\
+				validation_argument_helper.c\
 				collect_list.c\
 				create_map_struct.c\
 				error.c\
@@ -30,9 +30,9 @@ SRCS		=\
 				game_init.c\
 				game_event.c\
 				route_search_c.c\
-				validation_check_helper.c\
 				game_print.c\
-				all_collect_get_check.c
+				all_collect_get_check.c\
+				main.c
 
 
 # object file name
@@ -40,7 +40,7 @@ OBJS		= $(SRCS:.c=.o)
 
 # compile flag
 CC			= cc
-CCFLAGS		= -Wall -Wextra -Werror -g
+CCFLAGS		= -Wall -Wextra -Werror
 
 # Archive and remove command
 AR			= ar rcs

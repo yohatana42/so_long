@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:32:15 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:55:57 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,13 @@ typedef struct s_struct_all
 // main
 
 // validation_check.c
-int				validation_check(char *map_name, t_struct_all *all);
+int				validation_argument(char *map_name, t_struct_all *all);
 
 // validation_check_helper.c
 int				get_count_line(char *path, t_struct_all *all);
 
 // map_check
-int				map_check(t_struct_all *struct_all);
+int				validation_map(t_struct_all *struct_all);
 
 // map_check_helper
 int				get_map_hight(t_map *map);
@@ -156,7 +156,7 @@ void			move_player(t_struct_all *all, int post_x, int post_y);
 void			print_player(t_struct_all *all, int cur_x, int cur_y);
 
 // all collect get check
-int	all_get_check(t_struct_all *all);
+int				all_get_check(t_struct_all *all);
 
 // create_struct
 t_struct_all	*create_struct(void);
