@@ -6,7 +6,7 @@
 #    By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/08 14:55:25 by yohatana          #+#    #+#              #
-#    Updated: 2025/01/20 17:01:31 by yohatana         ###   ########.fr        #
+#    Updated: 2025/01/23 22:26:11 by yohatana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,12 @@ SRCS		=\
 				collect_list.c\
 				create_map_struct.c\
 				error.c\
-				map_route_search.c\
+				search_route_c.c\
+				search_map_route.c\
 				create_game_struct.c\
 				create_struct.c\
 				game_init.c\
 				game_event.c\
-				route_search_c.c\
 				game_print.c\
 				all_collect_get_check.c\
 				main.c

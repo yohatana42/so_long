@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:09 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 21:20:10 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:27:14 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	move_player(t_struct_all *all, int post_x, int post_y)
 
 static void	arrive_e(t_struct_all *all)
 {
-	if (!all_get_check(all))
+	if (!all_collect_get_check(all))
 		mlx_loop_end(all->game->mlx);
 }
 

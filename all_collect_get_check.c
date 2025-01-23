@@ -6,13 +6,13 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:31:07 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:31:45 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:26:30 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
-int	all_get_check(t_struct_all *all)
+int	all_collect_get_check(t_struct_all *all)
 {
 	t_collect	*collect;
 
