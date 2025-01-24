@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:09 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/24 16:01:03 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:58:42 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ int	key_hook(int keycode, t_struct_all *all)
 		free_struct_all(all);
 		exit(0);
 	}
-	if (keycode == UP || keycode == W)
+	else if (keycode == UP || keycode == W)
 		post_y = all->game->player->y - 1;
-	if (keycode == RIGHT || keycode == D)
+	else if (keycode == RIGHT || keycode == D)
 		post_x = all->game->player->x + 1;
-	if (keycode == LEFT || keycode == A)
+	else if (keycode == LEFT || keycode == A)
 		post_x = all->game->player->x - 1;
-	if (keycode == DOWN || keycode == S)
+	else if (keycode == DOWN || keycode == S)
 		post_y = all->game->player->y + 1;
+	else
+		return (0);
 	move_player(all, post_x, post_y);
 	return (0);
 }
@@ -67,7 +69,6 @@ void	move_player(t_struct_all *all, int post_x, int post_y)
 	all->game->player->y = post_y;
 	print_collect(all);
 	print_player(all, cur_x, cur_y);
-	// 他のキーを押しても反応する
 	ft_printf("count_move %d\n", ++all->game->count_move);
 }
 

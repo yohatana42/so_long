@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:43:22 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 20:36:15 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:51:59 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	game_init(t_struct_all *all)
 	print_img(all);
 	mlx_hook(all->game->win, DestroyNotify, \
 				StructureNotifyMask, on_destroy, all);
-	mlx_key_hook(all->game->win, &key_hook, all);
+	mlx_key_hook(all->game->win, key_hook, all);
 	mlx_loop(all->game->mlx);
 	return (0);
 }
