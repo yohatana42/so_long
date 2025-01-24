@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:33:09 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/23 22:27:14 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:01:03 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	move_player(t_struct_all *all, int post_x, int post_y)
 	all->game->player->y = post_y;
 	print_collect(all);
 	print_player(all, cur_x, cur_y);
-	all->game->count_move++;
-	ft_printf("count_move %d\n", all->game->count_move);
+	// 他のキーを押しても反応する
+	ft_printf("count_move %d\n", ++all->game->count_move);
 }
 
 static void	arrive_e(t_struct_all *all)

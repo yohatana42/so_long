@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_route_search.c                                 :+:      :+:    :+:   */
+/*   search_map_route.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 20:40:54 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 19:47:15 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:03:52 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	map_route_search(t_struct_all *all)
 		k++;
 	}
 	all->map->route_map = route_map;
-	search_c(all);
+	result = search_c(all);
+	if (result == 0)
+		error_exit(all, "No route to 'C', check map");
 	result = route_search_e(all->map, all->game->exit,
 			all->game->player->x, all->game->player->y);
 	if (result == 0)

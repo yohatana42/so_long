@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 19:12:48 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/20 16:50:27 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:56:12 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	validation_argument(char *map_name, t_struct_all *all)
 	int		count_line;
 
 	count_line = 0;
-	if (validation_map_name(map_name) == OK)
+	if (validation_map_name(map_name))
 	{
 		path = ft_strjoin(MAP_PATH, map_name);
 		if (!path)

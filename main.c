@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:23:38 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/20 16:58:01 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:33:34 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		all = create_struct();
-		if (validation_argument(argv[1], all) == NG)
+		if (validation_argument(argv[1], all) == 0)
 			error_exit(all, "argument check please");
-		if (validation_map(all) == NG)
+		if (validation_map(all) == 0)
 			error_exit(all, "this is not playable map");
 		game_init(all);
 	}

@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:29:26 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/15 18:45:13 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:57:06 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_collect	*create_new(int x, int y)
 	c->x = x;
 	c->y = y;
 	c->next = NULL;
-	c->get_flg = OFF;
+	c->get_flg = 0;
 	return (c);
 }
 

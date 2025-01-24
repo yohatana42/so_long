@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   route_search_c.c                                   :+:      :+:    :+:   */
+/*   search_route_c.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:14:43 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/17 19:48:09 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:38:57 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
-void	search_c(t_struct_all *all)
+int	search_c(t_struct_all *all)
 {
 	int			result;
 	t_collect	*object;
@@ -21,9 +21,16 @@ void	search_c(t_struct_all *all)
 	object = *(all->game->c_list);
 	while (object != NULL)
 	{
+		result = route_search_c(all->map, \
+								object, \
+								all->game->player->x, \
+								all->game->player->y);
+		if (result == 0)
+			return (0);
 		object = object->next;
 		route_map_init(all->map);
 	}
+	return (1);
 }
 
 int	route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y)

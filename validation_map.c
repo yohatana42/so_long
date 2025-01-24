@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/20 16:59:17 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:00:11 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,35 @@
 static int	validation_wall(t_map *map);
 static int	count_char(t_struct_all *all, char c, int x, int y);
 static int	validation_map_charactaer(t_struct_all *all);
+static void	validation_map_rectangular(t_struct_all *all);
 
 int	validation_map(t_struct_all *all)
 {
+	int	result;
+
+	result = 0;
 	all->map->width = (int)ft_strlen(all->map->map_str[0]);
 	all->map->hight = get_map_hight(all->map);
+	// 縦横比率の計算
+	validation_map_rectangular(all);
 	if (!validation_wall(all->map))
 		return (0);
-	validation_map_charactaer(all);
+	result = validation_map_charactaer(all);
+	map_route_search(all);
 	return (1);
+}
+
+static void	validation_map_rectangular(t_struct_all *all)
+{
+	int	i;
+
+	i = 0;
+	while (all->map->map_str[i])
+	{
+		if ((int)ft_strlen(all->map->map_str[i]) != all->map->width)
+			error_exit(all, "map is not rectangular");
+		i++;
+	}
 }
 
 static int	validation_map_charactaer(t_struct_all *all)
@@ -38,7 +58,7 @@ static int	validation_map_charactaer(t_struct_all *all)
 		while (j < all->map->width)
 		{
 			if (count_char(all, all->map->map_str[i][j], j, i) == 0)
-				error_exit(all, "this is not map char");
+				error_exit(all, "map ca use 'P' character");
 			j++;
 		}
 		i++;
@@ -46,10 +66,9 @@ static int	validation_map_charactaer(t_struct_all *all)
 	if (all->map->count_p != 1 || all->map->count_e != 1
 		|| all->map->count_c < 1)
 	{
-		error_exit(all, "map is NOT perfect.'C' or 'P' or 'E' is NOT ");
+		error_exit(all, "map is NOT perfect. check count 'C', 'P' or 'E'");
 		return (0);
 	}
-	map_route_search(all);
 	return (1);
 }
 

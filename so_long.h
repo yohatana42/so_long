@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 17:58:41 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/23 22:26:37 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:06:12 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@
 # include <stdlib.h>
 
 # define ERROR -1
-# define OFF 0
-# define ON 1
-# define NG 0
-# define OK 1
-# define MAP_PATH "maps/\0"
+# define MAP_PATH "./maps/\0"
 # define BER_EXTE ".ber\0"
+# define IMG_PATH_WALL "./textures/book_shell.xpm"
 # define WALL '1'
 # define FLOOR '0'
 # define IMG_H 50
@@ -84,7 +81,7 @@ typedef struct s_map
 	int			count_e;
 }		t_map;
 
-typedef	struct	s_game_img
+typedef struct s_game_img
 {
 	void	*player;
 	void	*collect;
@@ -93,7 +90,7 @@ typedef	struct	s_game_img
 	void	*floor;
 }	t_game_img;
 
-typedef	struct	s_game
+typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
@@ -128,19 +125,28 @@ int				get_map_hight(t_map *map);
 int				map_route_search(t_struct_all *all);
 void			route_map_init(t_map *map);
 
-int				route_search_e(t_map *map, t_exit *object, int cur_x, int cur_y);
-int				search_e_helper(t_map *map, t_exit *object, int cur_x, int cur_y);
+int				route_search_e(t_map *map,
+					t_exit *object, int cur_x, int cur_y);
+int				search_e_helper(t_map *map, \
+								t_exit *object, \
+								int cur_x, \
+								int cur_y);
 
 // search.c
-void			search_c(t_struct_all *all);
-int				route_search_c(t_map *map, t_collect *object, int cur_x, int cur_y);
-int				search_c_helper(t_map *map, t_collect *object, int cur_x, int cur_y);
+int				search_c(t_struct_all *all);
+int				route_search_c(t_map *map, \
+								t_collect *object, \
+								int cur_x, \
+								int cur_y);
+int				search_c_helper(t_map *map, \
+								t_collect *object, \
+								int cur_x, \
+								int cur_y);
 
 // c_list
 t_collect		**add_node(t_collect *c, t_collect **c_list);
 t_collect		*create_new(int x, int y);
 t_collect		*get_last(t_collect **c_list);
-
 
 // error
 void			error_exit(t_struct_all *all, char *str);
