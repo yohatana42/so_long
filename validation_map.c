@@ -6,7 +6,7 @@
 /*   By: yohatana <yohatana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 19:36:45 by yohatana          #+#    #+#             */
-/*   Updated: 2025/01/24 16:00:11 by yohatana         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:00:20 by yohatana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	validation_map(t_struct_all *all)
 	result = 0;
 	all->map->width = (int)ft_strlen(all->map->map_str[0]);
 	all->map->hight = get_map_hight(all->map);
-	// 縦横比率の計算
 	validation_map_rectangular(all);
 	if (!validation_wall(all->map))
 		return (0);
